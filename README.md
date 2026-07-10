@@ -89,5 +89,20 @@ jags.1 <- run_model(
 
 # 9. 输出模型结果：各采样点、各污染源贡献占比统计+可视化图表
 output_JAGS(jags.1, mix, source)
+## 运行前置
+1. 安装JAGS程序 + R包 `MixSIAR`、`rjags`
+2. 修改代码内 `setwd()` 本地文件路径，分步执行即可
+
+## 模型核心设置
+- 固定效应分组：采样点Sample
+- 开启过程误差、关闭残差误差
+- MCMC迭代可选 test/normal/long 精度档位
+
+## 结果规律
+1. 旱季农田土壤贡献普遍偏高；雨季冲刷加剧农业源输入，村镇河段生活污水占比上升
+2. 山林支流以森林土壤为主，农业河道农田土壤为首要污染源
+
+## 复用说明
+替换csv数据即可迁移至湖泊、流域沉积物/氮磷溯源研究
 <img width="441" height="185" alt="image" src="https://github.com/user-attachments/assets/262a1ecb-43ef-4409-bb50-49e661e8f6a8" />
 <img width="403" height="369" alt="image" src="https://github.com/user-attachments/assets/d6ef7885-0725-48f9-b82e-2f38485ad039" />
