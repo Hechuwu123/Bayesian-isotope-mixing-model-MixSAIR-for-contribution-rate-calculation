@@ -104,5 +104,8 @@ output_JAGS(jags.1, mix, source)
 
 ## 复用说明
 替换csv数据即可迁移至湖泊、流域沉积物/氮磷溯源研究
+
+## 输出成果
+
 <img width="441" height="185" alt="image" src="https://github.com/user-attachments/assets/262a1ecb-43ef-4409-bb50-49e661e8f6a8" />
 <img width="403" height="369" alt="image" src="https://github.com/user-attachments/assets/d6ef7885-0725-48f9-b82e-2f38485ad039" />
