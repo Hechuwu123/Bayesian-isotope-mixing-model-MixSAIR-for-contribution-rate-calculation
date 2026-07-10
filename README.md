@@ -45,7 +45,40 @@ plot_prior(alpha.prior = 1, source)
 # 7. 构建JAGS贝叶斯模型文件
 model_filename <- "MixSIAR_model.txt"
 resid_err <- FALSE   # 关闭残差误差项
-process_err <- TRUE  # 开启过程误差（水环境溯源标准配置）
+process_err <- TRUE  # 开启过程误差（水环境溯源标准配置）library(MixSIAR)
+getwd()#判断路径，括号里什么都不用填
+setwd("C:/Users/Administrator/Documents/2025河流跑代码4端元") #更改路径
+mix <- load_mix_data(filename="consumer.csv", 
+                     iso_names=c("d13C","d15N","Ratio"), 
+                     factors="Sample", 
+                     fac_random=FALSE,
+                     fac_nested=FALSE,
+                     cont_effects=NULL)
+mix
+
+source <- load_source_data(filename="source.csv",
+                           source_factors=NULL, 
+                           conc_dep=FALSE, 
+                           data_type="means", 
+                           mix)
+source
+
+discr <- load_discr_data(filename="TEF.csv", mix)
+discr
+
+plot_data(filename="isospace_plot", plot_save_pdf=TRUE, plot_save_png=FALSE, mix,source,discr)
+
+plot_prior(alpha.prior=1,source)
+
+
+model_filename <- "MixSIAR_model.txt"
+resid_err <- FALSE
+process_err <- TRUE
+write_JAGS_model(model_filename, resid_err, process_err, mix, source)
+jags.1 <- run_model(run="normal", mix, source, discr, model_filename)#步长设置：test/normal/short/long/very long/extreme...
+
+output_JAGS(jags.1, mix, source)
+
 write_JAGS_model(model_filename, resid_err, process_err, mix, source)
 
 # 8. 运行贝叶斯混合模型（normal标准迭代长度，平衡精度与运算速度）
@@ -56,3 +89,5 @@ jags.1 <- run_model(
 
 # 9. 输出模型结果：各采样点、各污染源贡献占比统计+可视化图表
 output_JAGS(jags.1, mix, source)
+<img width="441" height="185" alt="image" src="https://github.com/user-attachments/assets/262a1ecb-43ef-4409-bb50-49e661e8f6a8" />
+<img width="403" height="369" alt="image" src="https://github.com/user-attachments/assets/d6ef7885-0725-48f9-b82e-2f38485ad039" />
